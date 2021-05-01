@@ -14,6 +14,8 @@ gcloud config set project $PROJECT_ID
 #### Step 3 Enable Necessary Service APIs
 ```
 gcloud services enable storage-api.googleapis.com
+gcloud services enable compute.googleapis.com
+gcloud services enable container.googleapis.com
 ```
 #### Step 4 Service Account & Custom Role for github Actions
 ###### Create a Service account for github Actions
