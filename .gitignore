@@ -33,3 +33,4 @@ override.tf.json
 03_terraform_state_bucket.tf
 infra-as-code-poc-cred.json
 mdlz-uk-ecomm-20-avi-3682-bcec057aeb08.json
+credential.json
