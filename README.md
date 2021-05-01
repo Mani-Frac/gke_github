@@ -40,7 +40,9 @@ GITHUB_ACTIONS_SA="github-actions-ser-acc@$PROJECT_ID.iam.gserviceaccount.com"
 ```
 ###### Grant iam.serviceAccountUser role to the service account 
 ``` 
-gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$GITHUB_ACTIONS_SA" --role="roles/iam.serviceAccountUser"
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:$GITHUB_ACTIONS_SA" \
+    --role="roles/iam.serviceAccountUser"
 ```
 ###### Create Custom role
 ```
