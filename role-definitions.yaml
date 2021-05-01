@@ -1,0 +1,23 @@
+title: "custom_role Terraform-POC"
+description: "Terraform POC Role which has permissions necessary to create GKE Cluster"
+stage: "ALPHA"
+includedPermissions:
+#network permission
+- compute.networks.create
+- compute.networks.get
+- compute.networks.delete
+- compute.networks.updatePolicy
+#subnet permission
+- compute.subnetworks.create
+- compute.subnetworks.get
+- compute.subnetworks.delete
+- compute.instanceGroupManagers.get
+#kubernetes permission
+- container.clusters.create
+- container.clusters.delete
+- container.clusters.get
+- container.clusters.update
+#container operations
+- container.operations.get
+- container.deployments.get #necessary for cloud build application CI/CD
+- container.deployments.update
