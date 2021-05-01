@@ -21,18 +21,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # extract branch name
-    - name: Extract branch name
-      if: github.event_name != 'pull_request'
-      shell: bash
-      run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
-      id: extract_branch
+    - run: npm ci
+    - uses: nelonoel/branch-name@v1.0.1
 
-    # extract branch name on pull request
-    - name: Print branch name
-      if: github.event_name == 'pull_request'
-      run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
-      
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
