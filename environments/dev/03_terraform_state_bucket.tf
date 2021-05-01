@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "franky-gke-tfstate"
+    bucket = "github-actions-poc1-gh-actions-gke-tfstate"
     prefix = "env/dev"
   }
-} 
+}
