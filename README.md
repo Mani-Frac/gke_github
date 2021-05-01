@@ -78,4 +78,5 @@ sed -i -e 's/$TERRAFORM_STATE_BUCKET/'$TERRAFORM_STATE_BUCKET'/g' environments/d
 #### Step 6 Add the credential to github secrets
 ###### Open github repository in the brower, click on settings and create new secret called GOOGLE_CREDENTIALS with the service account credential
 
+###### set PROJECT_ID & REGION in github secrets
 

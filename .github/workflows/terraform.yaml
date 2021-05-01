@@ -10,6 +10,9 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
+      TF_VAR_region: ${{ secrets.REGION }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
