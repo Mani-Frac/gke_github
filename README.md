@@ -62,4 +62,7 @@ gcloud iam service-accounts keys create credential.json \
     --iam-account $GITHUB_ACTIONS_SA
 ```
 
-#### Step 6
+#### Step 6 Add the credential to github secrets
+###### Open github repository in the brower, click on settings and create new secret called GOOGLE_CREDENTIALS with the service account credential
+
+
