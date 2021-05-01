@@ -26,7 +26,17 @@ gsutil mb gs://${PROJECT_ID}-gh-actions-gke-tfstate
 ```
 gsutil versioning set on gs://${PROJECT_ID}-gh-actions-gke-tfstate
 ```
+######
+Update the Terraform State Bucket in environments/dev/03_terraform_state_bucket.tf
+```
+TERRAFORM_STATE_BUCKET=${PROJECT_ID}-gh-actions-gke-tfstate
 
+cp environments/dev/03_terraform_state_bucket_example environments/dev/03_terraform_state_bucket.tf
+
+
+sed -i -e 's/$TERRAFORM_STATE_BUCKET/'$TERRAFORM_STATE_BUCKET'/g' environments/dev/03_terraform_state_bucket.tf
+
+```
 #### Step 5 Service Account & Custom Role for github Actions
 ###### Create a Service account for github Actions
 ```
