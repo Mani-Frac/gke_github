@@ -69,7 +69,7 @@ gsutil mb gs://${PROJECT_ID}-gh-actions-gke-tfstate
 ```
 gsutil versioning set on gs://${PROJECT_ID}-gh-actions-gke-tfstate
 ```
-###### Give Bucket access to Cloud Build service account
+###### Give Bucket access to newly created service account
 ```
 gsutil iam ch serviceAccount:$GITHUB_ACTIONS_SA:objectAdmin gs://${PROJECT_ID}-gh-actions-gke-tfstate/
 ```
