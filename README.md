@@ -82,3 +82,74 @@ sed -i -e 's/$TERRAFORM_STATE_BUCKET/'$TERRAFORM_STATE_BUCKET'/g' environments/d
 
 ###### set PROJECT_ID & REGION in github secrets
 
+## Initial Application Deployment
+### Tech Stack
+1. Frontend -> React static files serverd using nginx  
+2. Backend -> Python Flask  
+
+#### Frontend related Dockerfile, nginx config file and React static files are inside frontend folder   
+
+#### Similarly Python Flask Backend app files & Dockerfile is inside the backend folder  
+
+Lets start
+#### Step 7: Create Frontend & Backend Container Images and push it to Container Registry
+```
+gcloud builds submit --config workflows/initial_deployment/cloudbuild-frontend.yaml .
+gcloud builds submit --config workflows/initial_deployment/cloudbuild-backend.yaml . 
+```
+#### Step 8: Authorize kubectl:
+```
+gcloud container clusters get-credentials [YOUR-CLUSTER-NAME] 
+Ex:-
+gcloud container clusters get-credentials $PROJECT_ID-gke --region $REGION
+```
+#### Step 9: Backend Flask-app Deployment
+```
+kubectl apply -f workflows/initial_deployment/deployment-backend.yaml
+
+Example:-(Linux -> This will replace the $PROJECT_ID from envronment variable)
+envsubst < workflows/initial_deployment/deployment-backend.yaml | kubectl apply -f -
+```
+#### Step 10:(Optional) Create External Load Balancer for Flask-app  
+```
+kubectl apply -f workflows/initial_deployment/service-flask-app-elb.yaml
+```  
+#### Step 11: Create Internal Load Balancer for Flask-app
+```
+kubectl apply -f workflows/initial_deployment/service-flask-app-ilb.yaml
+```
+#### Step 12: Frontend React-Nginx Deployment
+```
+kubectl apply -f workflows/initial_deployment/deployment-frontend.yaml
+
+Example:-(Linux -> This will replace the $PROJECT_ID from envronment variable)
+envsubst < workflows/initial_deployment/deployment-frontend.yaml | kubectl apply -f -
+```
+#### Step 13:(Optional) Create External Load Balancer for React-Nginx
+```
+kubectl apply -f workflows/initial_deployment/service-react-nginx-app-elb.yaml
+```
+#### Step 14: Create Internal Load Balancer for React-Nginx
+```
+kubectl apply -f workflows/initial_deployment/service-react-app-ilb.yaml
+```
+
+#### Step 15: Check all deployments
+###### Check deployment status:
+```
+kubectl get deployments
+```
+###### List the pods:
+```
+kubectl get pods
+```
+###### To list the Nodes:
+```
+kubectl get nodes
+```
+###### To get all services
+```
+kubectl get services
+```
+## Application CI/CD Setup
+#### Create Application CI/CD Trigger
