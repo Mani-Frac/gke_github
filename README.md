@@ -166,3 +166,8 @@ kubectl get services
 ```
 ## Application CI/CD Setup
 #### Create Application CI/CD Trigger
+
+## Appendix
+#### Add or remove permissions to the custom role we created earlier
+gcloud iam roles update custom_terraform_role --project=$PROJECT_ID \
+  --file=role-definitions.yaml

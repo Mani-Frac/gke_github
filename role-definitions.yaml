@@ -21,3 +21,6 @@ includedPermissions:
 - container.operations.get
 - container.deployments.get #necessary for cloud build application CI/CD
 - container.deployments.update
+
+#gcs bucket access for initial deployment
+- storage.bucket.create
