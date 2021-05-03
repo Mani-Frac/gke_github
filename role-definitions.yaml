@@ -24,3 +24,4 @@ includedPermissions:
 
 #gcs bucket access for initial deployment
 - storage.buckets.create
+- storage.buckets.get
