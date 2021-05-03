@@ -85,9 +85,15 @@ sed -i -e 's/$TERRAFORM_STATE_BUCKET/'$TERRAFORM_STATE_BUCKET'/g' environments/d
 ```
 
 #### Step 6 Add the credential to github secrets
-###### Open github repository in the brower, click on settings and create new secret called GOOGLE_CREDENTIALS with the service account credential
+###### Create github Repo and add this as the remote
+```
+git remote add github github-url
+git checkout dev
+git push github dev
+```
+###### open the github repo in the brower, click on settings and create new secret called GOOGLE_CREDENTIALS with the service account credential
 
-###### set PROJECT_ID & REGION in github secrets
+###### Also set PROJECT_ID & REGION in github secrets
 
 ## Initial Application Deployment
 ### Tech Stack
