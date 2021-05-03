@@ -1,3 +1,10 @@
+#### Step 0 Clone the Repo
+###### This setup needs a linux environment with gcloud cli to execute the commands. You cannot follow the below steps in a windows computer.
+
+```
+git clone repo-url
+cd cloned-folder
+```
 #### Step 1 Setting up environment variable
 ###### Copy the contents of .env.example and create a new file called .env
 ```
