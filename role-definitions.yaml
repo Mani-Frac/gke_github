@@ -24,6 +24,7 @@ includedPermissions:
 
 #gcs bucket access for initial deployment
 - storage.buckets.create
+<<<<<<< HEAD
 - storage.buckets.get
 - storage.buckets.delete
 - storage.buckets.get
@@ -42,3 +43,4 @@ includedPermissions:
 - container.services.update
 - container.services.list
 - container.deployments.list
+- storage.buckets.get

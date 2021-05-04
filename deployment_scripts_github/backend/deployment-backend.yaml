@@ -16,7 +16,7 @@ spec:
       containers:
       - name: flask-app-container
         # Replace $GCLOUD_PROJECT with your project ID
-        image: gcr.io/$PROJECT_ID/flaskapp:latest
+        image: gcr.io/$PROJECT_ID/flaskapp:$GITHUB_SHA
         # This app listens on port 8080 for web traffic by default.
         ports:
         - containerPort: 8080

@@ -92,8 +92,12 @@ git checkout dev
 git push github dev
 ```
 ###### open the github repo in the brower, click on settings and create new secret called GOOGLE_CREDENTIALS with the service account credential
-
-###### Also set PROJECT_ID & REGION in github secrets
+1- PROJECT_ID
+2- GOOGLE_CREDENTIALS
+3- GKE_CLUSTER
+4- REGION
+5- FE_DEPLOY_NAME
+6- BE_DEPLOY_NAME
 
 ## Initial Application Deployment
 ### Tech Stack
@@ -104,50 +108,44 @@ git push github dev
 
 #### Similarly Python Flask Backend app files & Dockerfile is inside the backend folder  
 
-Lets start
-#### Step 7: Create Frontend & Backend Container Images and push it to Container Registry
-```
-gcloud builds submit --config workflows/initial_deployment/cloudbuild-frontend.yaml .
-gcloud builds submit --config workflows/initial_deployment/cloudbuild-backend.yaml . 
-```
-#### Step 8: Authorize kubectl:
+#### Step 7: (Optional) Authorize kubectl: 
 ```
 gcloud container clusters get-credentials [YOUR-CLUSTER-NAME] 
 Ex:-
 gcloud container clusters get-credentials $PROJECT_ID-gke --region $REGION
 ```
-#### Step 9: Backend Flask-app Deployment
+#### Step 8: (Optional) Backend Flask-app Deployment
 ```
 kubectl apply -f workflows/initial_deployment/deployment-backend.yaml
 
 Example:-(Linux -> This will replace the $PROJECT_ID from envronment variable)
 envsubst < workflows/initial_deployment/deployment-backend.yaml | kubectl apply -f -
 ```
-#### Step 10:(Optional) Create External Load Balancer for Flask-app  
+#### Step 9:(Optional) Create External Load Balancer for Flask-app  
 ```
 kubectl apply -f workflows/initial_deployment/service-flask-app-elb.yaml
 ```  
-#### Step 11: Create Internal Load Balancer for Flask-app
+#### Step 10: (Optional) Create Internal Load Balancer for Flask-app
 ```
 kubectl apply -f workflows/initial_deployment/service-flask-app-ilb.yaml
 ```
-#### Step 12: Frontend React-Nginx Deployment
+#### Step 11: (Optional) Frontend React-Nginx Deployment
 ```
 kubectl apply -f workflows/initial_deployment/deployment-frontend.yaml
 
 Example:-(Linux -> This will replace the $PROJECT_ID from envronment variable)
 envsubst < workflows/initial_deployment/deployment-frontend.yaml | kubectl apply -f -
 ```
-#### Step 13:(Optional) Create External Load Balancer for React-Nginx
+#### Step 12:(Optional) Create External Load Balancer for React-Nginx
 ```
 kubectl apply -f workflows/initial_deployment/service-react-nginx-app-elb.yaml
 ```
-#### Step 14: Create Internal Load Balancer for React-Nginx
+#### Step 13: (Optional) Create Internal Load Balancer for React-Nginx
 ```
 kubectl apply -f workflows/initial_deployment/service-react-app-ilb.yaml
 ```
 
-#### Step 15: Check all deployments
+#### Step 14: (Optional) Check all deployments
 ###### Check deployment status:
 ```
 kubectl get deployments
