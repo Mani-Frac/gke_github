@@ -169,3 +169,14 @@ kubectl get services
 #### Add or remove permissions to the custom role we created earlier
 gcloud iam roles update custom_terraform_role --project=$PROJECT_ID \
   --file=role-definitions.yaml
+
+#### Github Container Registery
+###### Enable the container registry
+1. Profile/FeaturePreview/Enable
+###### Create Personal Access token for authenticating Container Registry
+Github/Profile/settings/developersettings/personalAccessToken/
+packages:write
+packages:read
+packages:delete
+###### Add the GITHUB_TOKEN to the github secrets
+###### Add the USERNAME to the github secrets
