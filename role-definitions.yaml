@@ -25,3 +25,21 @@ includedPermissions:
 #gcs bucket access for initial deployment
 - storage.buckets.create
 - storage.buckets.get
+- storage.buckets.delete
+- storage.buckets.get
+- storage.buckets.list
+- storage.buckets.update
+- storage.objects.create
+- storage.objects.delete
+- storage.objects.get
+- storage.objects.list
+- storage.objects.update
+
+#this is for github actions to deploy the services
+- container.services.get
+- container.deployments.create
+- container.services.create
+- container.services.update
+- container.services.list
+- container.deployments.list
+- storage.buckets.get

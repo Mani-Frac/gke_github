@@ -10,7 +10,7 @@
 #
 # For more support on how to run the workflow, please visit https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke
 
-name: Backend - Build and Deploy to GKE
+name: Frontend - Build and Deploy to GKE
 
 on:
   push:
@@ -19,10 +19,10 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
-  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER}} 
-  GKE_ZONE: ${{ secrets.REGION}}  
-  DEPLOYMENT_NAME: ${{ secrets.BE_DEPLOY_NAME}} #  # Should take Image name from Deployment-frontend file - metadata.name
-  IMAGE_NAME: flaskapp # Should take Image name from Deployment-frontend file - spec.template.labels.app
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER}}   
+  GKE_ZONE: ${{ secrets.REGION}}
+  DEPLOYMENT_NAME: ${{ secrets.FE_DEPLOY_NAME}} # Should take Image name from Deployment-frontend file  - metadata.name
+  IMAGE_NAME: react-nginx # Should take Image name from Deployment-frontend file - spec.template.labels.app
 
 jobs:
   setup-build-publish-deploy:
@@ -58,8 +58,8 @@ jobs:
         docker build \
           --tag "gcr.io/${PROJECT_ID}/${IMAGE_NAME}:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --file "backend/Dockerfile" \
-          ./backend
+          --file "frontend/Dockerfile" \
+          ./frontend
 
     # Push the Docker image to Google Container Registry
     - name: Publish
@@ -74,14 +74,14 @@ jobs:
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
-# First four lines are replacing the $PROJECT_ID in deployment-backend.yaml with environment variable
+# First four lines are replacing the $PROJECT_ID in deployment-frontend.yaml with environment variable
       run: |-
-        originalFile=deployment_scripts_github/backend/deployment-backend.yaml
+        originalFile=deployment_scripts_github/frontend/deployment-frontend.yaml
         tmpfile=$(mktemp)
         cat $originalFile | envsubst > "$tmpfile" && cp -pf "$tmpfile" $originalFile
         rm -f "$tmpfile"
-        ./kustomize build deployment_scripts_github/backend | kubectl apply -f -
+        ./kustomize build deployment_scripts_github/frontend | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
 
-# ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:latest deployment_scripts_github/deployment-backend.yaml
+# ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:latest deployment_scripts_github/deployment-frontend.yaml
