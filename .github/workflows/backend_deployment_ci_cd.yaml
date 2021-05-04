@@ -21,8 +21,8 @@ env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER}} 
   GKE_ZONE: ${{ secrets.REGION}}  
-  DEPLOYMENT_NAME: ${{ secrets.BE_DEPLOY_NAME}} #  # Should take Image name from Deployment-frontend file - metadata.name
-  IMAGE_NAME: flaskapp # Should take Image name from Deployment-frontend file - spec.template.labels.app
+  DEPLOYMENT_NAME: ${{ secrets.BE_DEPLOY_NAME}} #  # Should take Image name from Deployment-backend file - metadata.name
+  IMAGE_NAME: flaskapp # Should take Image name from Deployment-backend file - spec.template.labels.app
   USERNAME: ${{ secrets.USERNAME}}
 
 jobs:

@@ -1,4 +1,4 @@
-name: 'Infra CI/CD Terraform'
+name: 'Infra CI-CD Terraform'
 
 on:
   push:
