@@ -179,4 +179,4 @@ packages:write
 packages:read
 packages:delete
 ###### Add the GITHUB_TOKEN to the github secrets
-###### Add the USERNAME to the github secrets
+###### Add the USERNAME to the github secrets, the username should be in lowercase
