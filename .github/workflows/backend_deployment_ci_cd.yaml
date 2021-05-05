@@ -16,6 +16,7 @@ on:
   push:
     paths:
     - backend/**
+    - .github/workflows/backend_deployment_ci_cd.yaml
     branches:
     - dev
 
