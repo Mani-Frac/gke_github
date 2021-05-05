@@ -2,6 +2,8 @@ name: 'Infra CI-CD Terraform'
 
 on:
   push:
+    paths:
+    - environments/dev/**
     branches:
     - dev
   pull_request:
