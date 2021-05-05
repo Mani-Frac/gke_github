@@ -100,15 +100,14 @@ packages:write
 packages:read
 packages:delete
 
-###### open the github repo in the brower, click on settings and create new secret called GOOGLE_CREDENTIALS with the service account credential
-1- PROJECT_ID
-2- GOOGLE_CREDENTIALS
-3- GKE_CLUSTER
-4- REGION
-5- FE_DEPLOY_NAME
-6- BE_DEPLOY_NAME
-7- GITHUB_TOKEN 
-8- USERNAME (the username should be in lowercase)
+###### open the github repo in the brower, click on settings and create new secret 
+1. PROJECT_ID ($PROJECT_ID)
+2. GOOGLE_CREDENTIALS (service account credential)
+3. GKE_CLUSTER ($PROJECT_ID-gke)
+4. REGION (asia-southeast1)
+5. FE_DEPLOY_NAME ()
+6. BE_DEPLOY_NAME()
+8. USERNAME (the username should be in lowercase)
 
 ## Initial Application Deployment
 ### Tech Stack
