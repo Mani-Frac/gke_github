@@ -14,6 +14,8 @@ name: Backend - Build and Deploy to GKE
 
 on:
   push:
+    paths:
+    - backend/**
     branches:
     - dev
 
@@ -21,8 +23,8 @@ env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER}} 
   GKE_ZONE: ${{ secrets.REGION}}  
-  DEPLOYMENT_NAME: ${{ secrets.BE_DEPLOY_NAME}} #  # Should take Image name from Deployment-frontend file - metadata.name
-  IMAGE_NAME: flaskapp # Should take Image name from Deployment-frontend file - spec.template.labels.app
+  DEPLOYMENT_NAME: ${{ secrets.BE_DEPLOY_NAME}} #  # Should take Image name from Deployment-backend file - metadata.name
+  IMAGE_NAME: flaskapp # Should take Image name from Deployment-backend file - spec.template.labels.app
   USERNAME: ${{ secrets.USERNAME}}
 
 jobs:
@@ -80,7 +82,7 @@ jobs:
     - name: Build
       run: |-
         docker build \
-          --tag "ghcr.io/${PROJECT_ID}/${IMAGE_NAME}:$GITHUB_SHA" \
+          --tag "ghcr.io/${USERNAME}/${IMAGE_NAME}:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --file "backend/Dockerfile" \
           ./backend
@@ -88,7 +90,7 @@ jobs:
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "ghcr.io/${PROJECT_ID}/${IMAGE_NAME}:$GITHUB_SHA"
+        docker push "ghcr.io/${USERNAME}/${IMAGE_NAME}:$GITHUB_SHA"
 
     # Set up kustomize
     - name: Set up Kustomize
