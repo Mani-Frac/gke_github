@@ -91,13 +91,23 @@ git remote add github github-url
 git checkout dev
 git push github dev
 ```
-###### open the github repo in the brower, click on settings and create new secret called GOOGLE_CREDENTIALS with the service account credential
-1- PROJECT_ID
-2- GOOGLE_CREDENTIALS
-3- GKE_CLUSTER
-4- REGION
-5- FE_DEPLOY_NAME
-6- BE_DEPLOY_NAME
+#### Github Container Registery
+###### Enable the container registry
+1. Profile/FeaturePreview/Enable
+###### Create Personal Access token for authenticating Container Registry
+Github/Profile/settings/developersettings/personalAccessToken/
+packages:write
+packages:read
+packages:delete
+
+###### open the github repo in the brower, click on settings and create new secret 
+1. PROJECT_ID ($PROJECT_ID)
+2. GOOGLE_CREDENTIALS (service account credential)
+3. GKE_CLUSTER ($PROJECT_ID-gke)
+4. REGION (asia-southeast1)
+5. FE_DEPLOY_NAME ()
+6. BE_DEPLOY_NAME()
+8. USERNAME (the username should be in lowercase)
 
 ## Initial Application Deployment
 ### Tech Stack
@@ -170,13 +180,3 @@ kubectl get services
 gcloud iam roles update custom_terraform_role --project=$PROJECT_ID \
   --file=role-definitions.yaml
 
-#### Github Container Registery
-###### Enable the container registry
-1. Profile/FeaturePreview/Enable
-###### Create Personal Access token for authenticating Container Registry
-Github/Profile/settings/developersettings/personalAccessToken/
-packages:write
-packages:read
-packages:delete
-###### Add the GITHUB_TOKEN to the github secrets
-###### Add the USERNAME to the github secrets, the username should be in lowercase
