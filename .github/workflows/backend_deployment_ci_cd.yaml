@@ -124,5 +124,5 @@ jobs:
     
     - name: Continuos Deployment
       run: |-
-      kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=ghcr.io/${USERNAME}/${IMAGE_NAME}:$GITHUB_SHA
+        kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=ghcr.io/${USERNAME}/${IMAGE_NAME}:$GITHUB_SHA
 
